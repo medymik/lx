@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+Charger
+{% endblock %}
+{% block body %}
+
+	<div class="jumbotron">
+            
+                
+                {% if message %}
+                <h4 class="text-center">{{ message }}</h4>
+                    {% endif %}
+
+                <div class="row">
+                   {% for number in numbers %}
+                    <div class="col-md-4">
+                            <div class="card">
+                                    <div class="card-header">{{number.description}} <strong>({{ number.pricecall }}) TTC</strong> Gain ({{ number.price }} €) 
+                                    </div>
+                                    <div class="card-body">
+                                            <form method="post">
+                                                   
+                                                    <div class="form-group">
+                                                        <input type="hidden" name="callid" value="{{number.id}}">
+                                                        <input type="text" name="code" placeholder="Votre code..." class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="submit" value="Valider" class="form-control btn btn-primary">
+                                                    </div>
+                                         </form>
+                                    </div>
+                            </div>
+                    </div>
+                    {% endfor %}
+                </div>
+        
+    </div>
+{% endblock %}

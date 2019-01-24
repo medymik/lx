@@ -1,0 +1,10 @@
+<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-euro-sign"></i> Charger votre compte
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          {% for item in countries %}
+          <a class="dropdown-item" href="{{ path('chargement',{'name':item.name}) }}">{{ item.name }}</a>
+          {% endfor %}
+        </div>
+</li>

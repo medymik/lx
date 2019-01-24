@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+Les produits
+{% endblock %}
+{% block body %}
+
+	<div class="jumbotron">
+                <div class="row">
+                   {% for product in products %}
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="/images/{{ product.filename }}" alt="Card image cap">
+                            <div class="card-body">
+                              <h5 class="card-title">{{ product.price }}</h5>
+                              <p class="card-text">{{ product.title }}</p>
+                              <a href="{{ path('products_commander',{'id':product.id}) }}" class="btn btn-primary">Commander</a>
+                            </div>
+                          </div>
+                    </div>
+                    {% endfor %}
+                </div>
+        
+    </div>
+{% endblock %}

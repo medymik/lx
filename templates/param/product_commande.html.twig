@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+Historique
+{% endblock %}
+{% block body %}
+	<div class="jumbotron">
+            <h1 class="text-center">Demandes de retraits</h1>
+            <table class="table">
+                <thead>
+                    <th>id</th>
+                    <th>Titre</th>
+                    <th>Prix</th>
+                    <th>Status</th>
+                </thead>
+                <tbody>
+                    {% for commande in app.user.products %}
+                        <tr>
+                            <td>{{ commande.id }}</td>
+                            <td>{{ commande.title }}</td>
+                            <td>{{ commande.price }}</td>
+                            <td> En Cours</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+{% endblock %}
