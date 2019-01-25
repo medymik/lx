@@ -46,6 +46,21 @@ class Appelle
      */
     private $country;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $numero;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $titre;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nombre_appelle;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +134,49 @@ class Appelle
     public function setCountry(?Country $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function getNumero(): ?string
+    {
+        return $this->numero;
+    }
+
+    public function setNumero(string $numero): self
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    public function getNumberOfCalls()
+    {
+        $number = explode('-',$this->description);
+        $value = $number[1];
+        return $value;
+    }
+
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(string $titre): self
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    public function getNombreAppelle(): ?int
+    {
+        return $this->nombre_appelle;
+    }
+
+    public function setNombreAppelle(int $nombre_appelle): self
+    {
+        $this->nombre_appelle = $nombre_appelle;
 
         return $this;
     }

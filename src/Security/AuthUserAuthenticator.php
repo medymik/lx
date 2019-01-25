@@ -89,7 +89,7 @@ class AuthUserAuthenticator extends AbstractFormLoginAuthenticator
 
         if($user->getActive())
         {
-            return new RedirectResponse($this->urlGenerator->generate('app_register'));
+            return new RedirectResponse($this->urlGenerator->generate('products'));
         }else{
             $token->setAuthenticated(null);
             return new RedirectResponse($this->urlGenerator->generate('app_confirmation'));

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,6 +12,7 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use App\Entity\Config;
 
 class SecurityController extends AbstractController
 {
@@ -69,5 +71,18 @@ class SecurityController extends AbstractController
     {
         return $this->render('security/confirmation.html.twig');
     }
+
+    public function contact(ObjectManager $manager)
+    {
+        $email = $manager->getRepository(Config::class)->findOneByName('app-email');
+        $facebook = $manager->getRepository(Config::class)->findOneByName('app-facebook');
+        return $this->render('security/confirmation_model.html.twig',
+        [
+            'facebook' => $facebook->getValeur(),
+            'email' => $email->getValeur()
+        ]);
+    }
+
+
 
 }

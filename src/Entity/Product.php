@@ -75,7 +75,7 @@ class Product
         return $this->filename;
     }
 
-    public function setFilename(string $filename): self
+    public function setFilename(string $filename=null): self
     {
         $this->filename = $filename;
 
@@ -137,6 +137,11 @@ class Product
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 
 }

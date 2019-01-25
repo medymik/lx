@@ -4,17 +4,54 @@ Charger
 {% endblock %}
 {% block body %}
 
+    {% if error  %}
+    <div class="alert alert-danger" role="alert">
+            {{ error }}
+          </div>
+    {% endif %}
+
+    {% if message  %}
+    <div class="alert alert-success" role="alert">
+            {{ message }}
+          </div>
+    {% endif %}
+    
+
 	<div class="jumbotron">
             
-                
-                {% if message %}
-                <h4 class="text-center">{{ message }}</h4>
-                    {% endif %}
+               
 
                 <div class="row">
                    {% for number in numbers %}
-                    <div class="col-md-4">
-                            <div class="card">
+                    <div class="col-md-4 my-4">
+
+                        <div>
+                            <h3 style="color:white;font-size: 32px;" class="text-center">{{ number.titre }}</h3>
+                        </div>
+                        
+                        <div class="khat py-2" style="background-color:#000;opacity:0.9;border-radius:5px;text-align:center">
+                                <div>
+                             
+                                        <p style="font-size: 18px;color:#eee;">{{ number.description }}</p>
+                                    
+                                 </div>
+            
+            
+                                 <div>
+                                            <div class="rating">
+                                                {% for item in range(0,4) %}
+                                                 <img width="16" src="{{ asset('images/vote.png') }}">
+                                                {% endfor %}
+                                            </div>
+                               </div>
+
+                               <div class="py-1">
+                                   <button class="btn btn-outline btn-primary" data-toggle="modal" data-target="#modal{{ number.id }}">Créditer</button>
+                               </div>
+
+                
+                        </div>
+                                {#
                                     <div class="card-header">{{number.description}} <strong>({{ number.pricecall }}) TTC</strong> Gain ({{ number.price }} €) 
                                     </div>
                                     <div class="card-body">
@@ -29,10 +66,59 @@ Charger
                                                     </div>
                                          </form>
                                     </div>
-                            </div>
+                                 #}
+                            
                     </div>
+
+
+                                             <!-- Modal -->
+    <div  class="modal fade"  data-backdrop="static" id="modal{{ number.id }}" tabindex="1" role="dialog" aria-labelledby="modal{{ number.id }}Title" aria-hidden="true">
+            
+                    <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="modal{{ number.id }}Title">{{ number.description }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                    <p style="font-size:23px" class="text-center">
+                                            Téléphonez  <span class="text-danger">{{number.nombreAppelle }} fois</span> au <span class="text-danger"> {{number.numero}}</span>
+                                    </p>
+                                    <p class="text-center">
+                                            {{ number.description }}
+                                    </p>
+
+                                    <p class="text-center">
+                                        Vous allez gagner {{ number.price }} € par code
+                                    </p>
+                                    <form method="post">
+                                                   
+                                            <div class="form-group">
+                                                <input type="hidden" name="callid" value="{{number.id}}">
+                                                <input type="text" name="code" placeholder="Votre code..." class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="submit" value="Valider" class="form-control btn btn-primary">
+                                            </div>
+                                 </form>
+                                     
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </div>
+            
+</div>
+
+                   
+      
                     {% endfor %}
                 </div>
         
     </div>
+
+   
 {% endblock %}

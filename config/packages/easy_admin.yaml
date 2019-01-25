@@ -11,6 +11,8 @@ easy_admin:
           class: App\Entity\Country
         Appelle:
           class: App\Entity\Appelle
+        Config:
+          class: App\Entity\Config
         Product:
           class: App\Entity\Product
           list:

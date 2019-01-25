@@ -4,7 +4,10 @@
 {% block body %}
     <div class="jumbotron">
             <div class="col-md-6 offset-md-3">
-                   <h3>Contactez nous pour la confirmation !</h3>
+                   <h3 style="font-size:30px;font-weight:bold">Contactez nous pour la confirmation</h3>
+                   {{ render(controller(
+                    'App\\Controller\\SecurityController::contact'
+                )) }}
             </div>
     </div>
 {% endblock %}

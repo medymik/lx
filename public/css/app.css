@@ -1,0 +1,64 @@
+body{
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+}
+
+.bg-light{
+    background-color: #9c88ff!important;
+}
+
+.navbar-brand{
+    font-size: 30px;
+    color: white!important;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+}
+
+.navbar-light .navbar-nav .nav-link{
+    font-size: 20px;
+    color: white!important;
+}
+
+.jumbotron{
+    background-color: #9c88ff!important;
+    border-radius: 5px;
+    opacity: 0.9;
+}
+
+.card-img-top:hover{
+    height: 300px;
+    width: 200px;;
+}
+
+.modal-backdrop.show {
+    display: none;
+}
+
+.modal{
+    position: absolute;
+    background: #000;
+    opacity:0.9;
+}
+
+.modal-header{
+    background-color: rgba(8,3,37,10)!important;
+}
+
+.modal-body{
+    background-color: rgba(8,3,37,10)!important;
+}
+
+.modal-footer{
+    background-color: rgba(8,3,37,10)!important;
+}
+
+.modal-backdrop.show {
+    opacity: 0.8;
+}
+
+.modal-backdrop.in
+{
+    opacity:0.5 !important;
+    position:fixed;
+    height:100%;
+}

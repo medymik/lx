@@ -29,6 +29,7 @@ class ParamController extends AbstractController
     public function chargement($name,ObjectManager $manager,Request $request,UserInterface $user)
     {
     	$message = '';
+    	$error = '';
     	if($request->getMethod()=="POST")
     	{ 
     		
@@ -56,7 +57,7 @@ class ParamController extends AbstractController
     				}
     				else
     				{
-    					$message = "Code incorrect !";
+    					$error = "Code incorrect !";
     				}
     			}
     		}
@@ -73,7 +74,8 @@ class ParamController extends AbstractController
 
         return $this->render('param/chargement.html.twig', [
             'numbers' => $numbers,
-            'message'=>$message
+            'message'=>$message,
+            'error' => $error
         ]);
     }
 
@@ -151,15 +153,21 @@ class ParamController extends AbstractController
     }
 
     /**
-    * @Route("dash/products/{id}",name="products_commander")
+    * @Route("dash/productscommande/{id?}",name="products_commander")
     */
-    public function products_commande($id,ObjectManager $manager,UserInterface $user)
+    public function products_commande($id=null,ObjectManager $manager,UserInterface $user)
     {
-       $product = $manager->getRepository(Product::class)->find($id);
+        $product = null;
+        if($id){
+            $product = $manager->getRepository(Product::class)->find($id);
+        }
+       
        
        if($product && $user->getSolde()>=$product->getPrice()){
            $user->addProduct($product);
+           $manager->flush();
        }
+
 
        return $this->render('param/product_commande.html.twig');
 

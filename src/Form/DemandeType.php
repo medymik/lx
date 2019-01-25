@@ -16,10 +16,8 @@ class DemandeType extends AbstractType
             ->add('montant')
             ->add('method',ChoiceType::class,[
                 'choices' => array(
-            'Paypal' => 'Paypal',
              'Cash+' => 'Cash+',
-             'Wafacash' => 'Wafacash',
-             'Skrill' => 'Skrill'
+             'Wafacash' => 'Wafacash'
              )
             ])
         ;
