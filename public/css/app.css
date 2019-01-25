@@ -25,10 +25,6 @@ body{
     opacity: 0.9;
 }
 
-.card-img-top:hover{
-    height: 300px;
-    width: 200px;;
-}
 
 .modal-backdrop.show {
     display: none;
@@ -62,3 +58,10 @@ body{
     position:fixed;
     height:100%;
 }
+
+@media screen and (min-width: 992px) {
+    .card-img-top:hover{
+        height: 300px;
+        width: 200px;;
+    }
+  }

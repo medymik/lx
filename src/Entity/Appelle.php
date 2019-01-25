@@ -61,6 +61,11 @@ class Appelle
      */
     private $nombre_appelle;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\MicroPaiement", inversedBy="appelles")
+     */
+    private $micropaiment;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -177,6 +182,18 @@ class Appelle
     public function setNombreAppelle(int $nombre_appelle): self
     {
         $this->nombre_appelle = $nombre_appelle;
+
+        return $this;
+    }
+
+    public function getMicropaiment(): ?MicroPaiement
+    {
+        return $this->micropaiment;
+    }
+
+    public function setMicropaiment(?MicroPaiement $micropaiment): self
+    {
+        $this->micropaiment = $micropaiment;
 
         return $this;
     }

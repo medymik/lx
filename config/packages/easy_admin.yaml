@@ -13,6 +13,8 @@ easy_admin:
           class: App\Entity\Appelle
         Config:
           class: App\Entity\Config
+        MicroPaiement:
+          class: App\Entity\MicroPaiement
         Product:
           class: App\Entity\Product
           list:

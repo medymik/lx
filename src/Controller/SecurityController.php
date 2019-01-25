@@ -83,6 +83,13 @@ class SecurityController extends AbstractController
         ]);
     }
 
+    public function websitename(ObjectManager $manager)
+    {
+        $name = $manager->getRepository(Config::class)->findOneByName('app-name');
+        return new Response($name->getValeur());
+
+    }
+
 
 
 }
