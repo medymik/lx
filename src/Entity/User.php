@@ -67,10 +67,16 @@ class User implements UserInterface
      */
     private $products;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Code", mappedBy="user")
+     */
+    private $codes;
+
     public function __construct()
     {
         $this->demandes = new ArrayCollection();
         $this->products = new ArrayCollection();
+        $this->codes = new ArrayCollection();
     }
 
 
@@ -245,6 +251,37 @@ class User implements UserInterface
     {
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Code[]
+     */
+    public function getCodes(): Collection
+    {
+        return $this->codes;
+    }
+
+    public function addCode(Code $code): self
+    {
+        if (!$this->codes->contains($code)) {
+            $this->codes[] = $code;
+            $code->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCode(Code $code): self
+    {
+        if ($this->codes->contains($code)) {
+            $this->codes->removeElement($code);
+            // set the owning side to null (unless already changed)
+            if ($code->getUser() === $this) {
+                $code->setUser(null);
+            }
         }
 
         return $this;

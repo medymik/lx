@@ -15,6 +15,8 @@ easy_admin:
           class: App\Entity\Config
         MicroPaiement:
           class: App\Entity\MicroPaiement
+        Code:
+          class: App\Entity\Code
         Product:
           class: App\Entity\Product
           list:

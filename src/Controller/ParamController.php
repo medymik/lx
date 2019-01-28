@@ -45,18 +45,28 @@ class ParamController extends AbstractController
 				$datas=urlencode($datas);
 
     			$f = file_get_contents("https://script.starpass.fr/check_php.php?ident=$ident&codes=$codes&DATAS=$datas");
-    			$arr = explode('|', $f);
+                $arr = explode('|', $f);
+                $cd = new \App\Entity\Code;
+                $usr = $manager->getRepository(User::class)->find($user->getId());
     			if($arr){
     				if($arr[0]=='OUI')
     				{
     					$message = "Code valide !";
-    					$usr = $manager->getRepository(User::class)->find($user->getId());
-    					$usr->setSolde($usr->getSolde()+$appelle->getPrice());
+    					
+                        $usr->setSolde($usr->getSolde()+$appelle->getPrice());
+                        
+                        $cd->setCode($code.' correct !');
+                        $manager->persist($cd);
+                        $usr->addCode($cd);
     					$manager->flush();
 
     				}
     				else
     				{
+                        $cd->setCode($code.' incorrect !');
+                        $manager->persist($cd);
+                        $usr->addCode($cd);
+    					$manager->flush();
     					$error = "Code incorrect !";
     				}
     			}
