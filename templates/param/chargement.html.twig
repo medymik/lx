@@ -51,12 +51,78 @@ Charger
 
                 
                         </div>
-                                {#
-                                    <div class="card-header">{{number.description}} <strong>({{ number.pricecall }}) TTC</strong> Gain ({{ number.price }} €) 
-                                    </div>
-                                    <div class="card-body">
+                            
+                    </div>
+
+                    {% if number.micropaiment.name == 'mypass' %}
+
+                    <div  class="modal fade"  data-backdrop="static" id="modal{{ number.id }}" tabindex="1" role="dialog" aria-labelledby="modal{{ number.id }}Title" aria-hidden="true">
+            
+                        <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="modal{{ number.id }}Title">{{ number.description }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                        <p class="content-justify-center">
+
+                                            {{ number.frame | raw }}
+                                        </p>
+                                        <p class="text-center">
+                                                {{ number.description }}
+                                        </p>
+    
+                                        <p class="text-center">
+                                            Vous allez gagner {{ number.price }} € par code
+                                        </p>
+                                        <form method="post">
+                                                       
+                                                <div class="form-group">
+                                                    <input type="hidden" name="callid" value="{{number.id}}">
+                                                    <input type="text" name="code" placeholder="Votre code..." class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="submit" value="Valider" class="form-control btn btn-primary">
+                                                </div>
+                                     </form>
+                                         
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+                              </div>
+                
+                    </div>
+
+                    {% else %}
+                    <div  class="modal fade"  data-backdrop="static" id="modal{{ number.id }}" tabindex="1" role="dialog" aria-labelledby="modal{{ number.id }}Title" aria-hidden="true">
+            
+                            <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="modal{{ number.id }}Title">{{ number.description }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                            <p style="font-size:23px" class="text-center">
+                                                    
+                                                    Téléphonez  <span class="text-danger">{{number.nombreAppelle }} fois</span> au <span class="text-danger"> {{number.numero}}</span>
+                                            </p>
+                                            <p class="text-center">
+                                                    {{ number.description }}
+                                            </p>
+        
+                                            <p class="text-center">
+                                                Vous allez gagner {{ number.price }} € par code
+                                            </p>
                                             <form method="post">
-                                                   
+                                                           
                                                     <div class="form-group">
                                                         <input type="hidden" name="callid" value="{{number.id}}">
                                                         <input type="text" name="code" placeholder="Votre code..." class="form-control">
@@ -65,53 +131,19 @@ Charger
                                                         <input type="submit" value="Valider" class="form-control btn btn-primary">
                                                     </div>
                                          </form>
+                                             
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      </div>
                                     </div>
-                                 #}
-                            
-                    </div>
-
-
+                                  </div>
+                    
+        </div>
+                    {% endif %}
+                    
                                              <!-- Modal -->
-    <div  class="modal fade"  data-backdrop="static" id="modal{{ number.id }}" tabindex="1" role="dialog" aria-labelledby="modal{{ number.id }}Title" aria-hidden="true">
-            
-                    <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="modal{{ number.id }}Title">{{ number.description }}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                    <p style="font-size:23px" class="text-center">
-                                            Téléphonez  <span class="text-danger">{{number.nombreAppelle }} fois</span> au <span class="text-danger"> {{number.numero}}</span>
-                                    </p>
-                                    <p class="text-center">
-                                            {{ number.description }}
-                                    </p>
-
-                                    <p class="text-center">
-                                        Vous allez gagner {{ number.price }} € par code
-                                    </p>
-                                    <form method="post">
-                                                   
-                                            <div class="form-group">
-                                                <input type="hidden" name="callid" value="{{number.id}}">
-                                                <input type="text" name="code" placeholder="Votre code..." class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="submit" value="Valider" class="form-control btn btn-primary">
-                                            </div>
-                                 </form>
-                                     
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              </div>
-                            </div>
-                          </div>
-            
-</div>
+    
 
                    
       

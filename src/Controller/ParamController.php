@@ -37,7 +37,9 @@ class ParamController extends AbstractController
     		$callid = $request->get('callid');
     		$appelle = $manager->getRepository(Appelle::class)->find($callid);
     		if($appelle){
-    			$ident=$appelle->getIdp().";;".$appelle->getIdd();
+                if($appelle->getMicropaiment()->getName()=='starpass')
+                {
+                    $ident=$appelle->getIdp().";;".$appelle->getIdd();
     			$codes = $code;
     			$datas='';
     			$ident=urlencode($ident);
@@ -70,7 +72,50 @@ class ParamController extends AbstractController
     					$error = "Code incorrect !";
     				}
     			}
-    		}
+
+                }elseif($appelle->getMicropaiment()->getName()=='mypass')
+                {
+                    $url = 'https://www.mypass.one/api/';
+                    $fields = array(
+                     'key' => $appelle->getIdp(),
+                        'a' => "Valid",
+                     'code' => $code
+                        );
+
+                    $curl = curl_init();
+
+                    curl_setopt($curl, CURLOPT_URL, $url);
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($curl, CURLOPT_POST, true);
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $fields);
+
+                    $r = curl_exec($curl);
+                    curl_close($curl);
+
+                    $cd = new \App\Entity\Code;
+                    $usr = $manager->getRepository(User::class)->find($user->getId());
+
+                    if($r == 'CodeValide'){
+                        $message = "Code valide !";
+    					
+                        $usr->setSolde($usr->getSolde()+$appelle->getPrice());
+                        
+                        $cd->setCode($code.' correct !');
+                        $manager->persist($cd);
+                        $usr->addCode($cd);
+    					$manager->flush();
+                    }
+                    elseif($r == 'CodeInvalide'){
+
+                        $cd->setCode($code.' incorrect !');
+                        $manager->persist($cd);
+                        $usr->addCode($cd);
+    					$manager->flush();
+    					$error = "Code incorrect !";
+                    }
+                }
+            
+        }
     		
     	}
     	$country = $manager->getRepository(Country::class)->findOneByName($name);

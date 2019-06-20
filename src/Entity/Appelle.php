@@ -66,6 +66,11 @@ class Appelle
      */
     private $micropaiment;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $frame;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -201,5 +206,17 @@ class Appelle
     public function __toString()
     {
         return $this->description;
+    }
+
+    public function getFrame(): ?string
+    {
+        return $this->frame;
+    }
+
+    public function setFrame(?string $frame): self
+    {
+        $this->frame = $frame;
+
+        return $this;
     }
 }
